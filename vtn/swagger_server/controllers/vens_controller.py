@@ -100,8 +100,6 @@ def create_resource(body, ven_id):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Resource.from_dict(connexion.request.get_json())  # noqa: E501
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.set_ven_resource(ven_id, body)
 
 
@@ -130,9 +128,7 @@ def delete_ven(ven_id):  # noqa: E501
 
     :rtype: Ven
     """
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return backend.delete_ven(ven_id)
 
 
 def delete_ven_resource(ven_id, resource_id):  # noqa: E501
@@ -147,10 +143,6 @@ def delete_ven_resource(ven_id, resource_id):  # noqa: E501
 
     :rtype: Resource
     """
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
-    if connexion.request.is_json:
-        resource_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.delete_ven_resource(ven_id, resource_id)
 
 
@@ -164,8 +156,6 @@ def search_ven_by_id(ven_id):  # noqa: E501
 
     :rtype: Ven
     """
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.get_ven(ven_id)
 
 
@@ -181,10 +171,6 @@ def search_ven_resource_by_id(ven_id, resource_id):  # noqa: E501
 
     :rtype: Resource
     """
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
-    if connexion.request.is_json:
-        resource_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.get_ven_resource(ven_id, resource_id)
 
 
@@ -208,8 +194,6 @@ def search_ven_resources(ven_id, resource_name=None, target_type=None, target_va
 
     :rtype: List[Resource]
     """
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.search_all_ven_resources(ven_id, resource_name, target_type, target_values, skip, limit)
 
 
@@ -247,8 +231,6 @@ def update_ven(ven_id, body=None):  # noqa: E501
     :rtype: Ven
     """
     if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
-    if connexion.request.is_json:
         body = Ven.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.update_ven(ven_id, body)
 
@@ -267,10 +249,6 @@ def update_ven_resource(ven_id, resource_id, body=None):  # noqa: E501
 
     :rtype: Resource
     """
-    if connexion.request.is_json:
-        ven_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
-    if connexion.request.is_json:
-        resource_id = ObjectID.from_dict(connexion.request.get_json())  # noqa: E501
     if connexion.request.is_json:
         body = Resource.from_dict(connexion.request.get_json())  # noqa: E501
     return backend.update_ven_resource(ven_id, resource_id, body)
