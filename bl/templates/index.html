@@ -51,7 +51,55 @@
         <form action="{{ url_for('create_events') }}" method="post">
             <button type="submit" class="btn btn-primary">Create events</button>
         </form>
+
     </div>
+
+    <div class="container mt-5">
+        <h2>Day ahead pricing</h2>
+        <canvas id="priceChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Data from Flask
+        const hours = {{ hours | tojson }};
+        const prices = {{ prices | tojson }};
+    
+        // Create Chart.js Line Chart
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: hours,
+                datasets: [{
+                    label: 'Price ($)',
+                    data: prices,
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Hour'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price ($)'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
